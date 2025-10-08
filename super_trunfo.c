@@ -9,8 +9,10 @@ int main(){
     int Turisticos1; //Número de pontos turísticos
     float Densidade1; // Densidade Populacional
     char escolha_jogador = '0'; //Escolha do jogador
-    
-    
+    char escolha2_jogador = '0'; //Escolha do segundo jogador
+    float ValorCarta1; //Valor da carta 1
+    float ValorCarta2; //Valor da carta 2
+
     //DADOS CARTA 1
     printf("CARTA 1: \n");
     printf("Digite o Nome do País: \n");
@@ -79,67 +81,59 @@ int main(){
     printf("5. Densidade\n");
     scanf(" %c", &escolha_jogador);
 
-switch(escolha_jogador){   
-       
-    case '1': {
-        if (Populacao1 > Populacao2) {
-            printf("%s, %d Carta 1 venceu!\n", Pais_carta1, Populacao1);
-        } else if (Populacao2 > Populacao1) {
-            printf("%s, %d Carta 2 venceu!\n", Pais_carta2, Populacao2);
-        } else {
-            printf("Empate!\n");
-        }
-        break;
+    printf("\n"); // Linha de separacao
+
+    // Validação para evitar escolhas iguais
+    printf("Escolha outro atributo:\n");
+    if (escolha_jogador != '1') printf("1. População\n");
+    if (escolha_jogador != '2') printf("2. Área\n");
+    if (escolha_jogador != '3') printf("3. PIB\n");
+    if (escolha_jogador != '4') printf("4. Pontos Turísticos\n");
+    if (escolha_jogador != '5') printf("5. Densidade\n");
+    scanf(" %c", &escolha2_jogador);
+
+    printf("\n"); // Linha de separacao
+
+    // Obter valores dos atributos escolhidos
+    float valor1_carta1, valor1_carta2, valor2_carta1, valor2_carta2;
+
+    // Para primeiro atributo
+    switch(escolha_jogador) {
+        case '1': valor1_carta1 = Populacao1; valor1_carta2 = Populacao2; break;
+        case '2': valor1_carta1 = Area1; valor1_carta2 = Area2; break;
+        case '3': valor1_carta1 = PIB1; valor1_carta2 = PIB2; break;
+        case '4': valor1_carta1 = Turisticos1; valor1_carta2 = Turisticos2; break;
+        case '5': valor1_carta1 = Densidade1; valor1_carta2 = Densidade2; break;
+        default: printf("Opção inválida!\n"); return 1;
     }
-    
-    case '2': {
-        if (Area1 > Area2) {
-            printf("%s, %.2f Carta 1 venceu!\n", Pais_carta1, Area1);
-        } else if (Area2 > Area1) {
-            printf("%s, %.2f Carta 2 venceu!\n", Pais_carta2, Area2);
-        } else {
-            printf("Empate!\n");
-        }
-        break;
+
+    // Para segundo atributo
+    switch(escolha2_jogador) {
+        case '1': valor2_carta1 = Populacao1; valor2_carta2 = Populacao2; break;
+        case '2': valor2_carta1 = Area1; valor2_carta2 = Area2; break;
+        case '3': valor2_carta1 = PIB1; valor2_carta2 = PIB2; break;
+        case '4': valor2_carta1 = Turisticos1; valor2_carta2 = Turisticos2; break;
+        case '5': valor2_carta1 = Densidade1; valor2_carta2 = Densidade2; break;
+        default: printf("Opção inválida!\n"); return 1;
     }
-    
-    case '3': {
-        if (PIB1 > PIB2) {
-            printf("%s, %.2f Carta 1 venceu!\n", Pais_carta1, PIB1);
-        } else if (PIB2 > PIB1) {
-            printf("%s, %.2f Carta 2 venceu!\n", Pais_carta2, PIB2);
-        } else {
-            printf("Empate!\n");
-        }
-        break;
+
+    // Calcular soma dos atributos
+    ValorCarta1 = valor1_carta1 + valor2_carta1;
+    ValorCarta2 = valor1_carta2 + valor2_carta2;
+
+    // Exibir resultado detalhado
+    printf("Resultado da comparação:\n");
+    printf("Carta 1 (%s): %.2f + %.2f = %.2f\n", Pais_carta1, valor1_carta1, valor2_carta1, ValorCarta1);
+    printf("Carta 2 (%s): %.2f + %.2f = %.2f\n", Pais_carta2, valor1_carta2, valor2_carta2, ValorCarta2);
+
+    // Comparar e exibir vencedor
+    if (ValorCarta1 > ValorCarta2) {
+        printf("Carta 1 (%s) venceu!\n", Pais_carta1);
+    } else if (ValorCarta2 > ValorCarta1) {
+        printf("Carta 2 (%s) venceu!\n", Pais_carta2);
+    } else {
+        printf("Empate!\n");
     }
-    
-    case '4': {
-        if (Turisticos1 > Turisticos2) {
-            printf("%s, %d Carta 1 venceu!\n", Pais_carta1, Turisticos1);
-        } else if (Turisticos2 > Turisticos1) {
-            printf("%s, %d Carta 2 venceu!\n", Pais_carta2, Turisticos2);
-        } else {
-            printf("Empate!\n");
-        }
-        break;
-    }
-    
-    case '5': {
-        if (Densidade1 < Densidade2) {
-            printf("%s, %.2f Carta 1 venceu!\n", Pais_carta1, Densidade1);
-        } else if (Densidade2 < Densidade1) {
-            printf("%s, %.2f Carta 2 venceu!\n", Pais_carta2, Densidade2);
-        } else {
-            printf("Empate!\n");
-        }
-        break;
-    }
-    default: {
-        printf("Opção inválida!\n");
-        break;
-    }
-}
 
 return 0;
 }
